@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 13:53:52 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:52:55 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define FDF_H
 # include "ft_garbage_collector.h"
 # include <mlx.h>
-#define FRAME_WIDTH 1920
-#define FRAME_HEIGHT 1080
-
+# define FRAME_WIDTH 1920
+# define FRAME_HEIGHT 1080
 
 typedef struct s_frame_data
 {
@@ -59,8 +58,10 @@ typedef struct s_fdf
 //helpers
 //math.c
 double				degree_to_rad(int degree);
+int					ft_abs(int x);
 //utils.c
 void				pointer_swap(void **a, void **b);
+void				int_swap(int *a, int *b);
 
 // rasterisation
 // fdf_pixel_put.c
@@ -75,6 +76,6 @@ void				draw_fdf(t_fdf *fdf);
 t_point				isometric_view(t_fdf *fdf, t_point p);
 
 //init_fdf.c
-t_boolean   fdf_init(t_fdf *fdf);
+t_boolean			fdf_init(t_fdf *fdf);
 
 #endif
