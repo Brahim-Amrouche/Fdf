@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 15:48:56 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 13:54:09 by bamrouch         ###   ########.fr       */
+/*   Created: 2023/01/31 11:58:44 by bamrouch          #+#    #+#             */
+/*   Updated: 2023/01/31 13:51:47 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include <math.h>
 
-int main()
+double	degree_to_rad(int degree)
 {
-	t_fdf	fdf;
-
-	ft_bzero(&fdf,sizeof(fdf));
-	fdf_init(&fdf);
-	draw_fdf(&fdf);
-	mlx_loop(fdf.mlx);
+	return (degree * ((float)M_PI) / 180.0F);
 }

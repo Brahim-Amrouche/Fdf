@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 15:48:56 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 13:54:09 by bamrouch         ###   ########.fr       */
+/*   Created: 2023/01/31 12:20:51 by bamrouch          #+#    #+#             */
+/*   Updated: 2023/01/31 13:52:24 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-
-int main()
+void	pointer_swap(void **a, void **b)
 {
-	t_fdf	fdf;
+	void *tmp;
 
-	ft_bzero(&fdf,sizeof(fdf));
-	fdf_init(&fdf);
-	draw_fdf(&fdf);
-	mlx_loop(fdf.mlx);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

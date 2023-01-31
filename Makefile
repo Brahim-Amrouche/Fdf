@@ -1,10 +1,10 @@
-SRC_FILES = ${wildcard ./src/*.c}
+SRC_FILES = ${wildcard ./src/**/*.c}  ${wildcard ./src/*.c} 
 
 CC = cc
 
 INCLUDES = -I./includes -I./libft/includes 
 
-FLAGS = -Wall -Wextra -fsanitize=address $(INCLUDES)
+FLAGS = -Wall -Wextra -Werror -fsanitize=address $(INCLUDES)
 
 NAME = fdf
 
