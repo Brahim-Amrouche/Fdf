@@ -6,7 +6,13 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 19:19:36 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 19:20:52 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/01/31 20:44:41 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
+
+// int **fdf_map_parser(t_fdf *fdf,int fd)
+// {
+//     while
+// }
