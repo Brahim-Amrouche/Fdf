@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 20:44:19 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:16:42 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@ static void	fdf_draw_block(t_fdf *fdf, t_point p1, t_point p2)
 
 void	draw_fdf(t_fdf *fdf)
 {
-	unsigned int x;
-	unsigned int y;
+	int x;
+	int y;
 
-	x = 0;
-	while (x <= 10)
+	y = 1;
+	ft_printf("[%d]\n", fdf->map[1][3]);
+	while (y < fdf->map[0][0])
 	{
-		y = 0;
-		while (y <= 10)
+		x = 1;
+		while (x < fdf->map[y][0])
 		{
-			if (x > 0)
-				fdf_draw_block(fdf, (t_point){x, y, 0}, (t_point){x - 1, y, 0});
-			if (y > 0)
-				fdf_draw_block(fdf, (t_point){x, y, 0}, (t_point){x, y - 1, 0});
-			y++;
+			if (x > 1)
+				fdf_draw_block(fdf, (t_point){y, x, fdf->map[y][x]}, (t_point){y, x - 1, fdf->map[y][x - 1]});
+			if (y > 1)
+				fdf_draw_block(fdf, (t_point){y, x, fdf->map[y][x]}, (t_point){y - 1, x, fdf->map[y - 1][x]});
+			x++;
 		}
-		x++;
+		y++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_window, fdf->frame.img, 0, 0);
 }

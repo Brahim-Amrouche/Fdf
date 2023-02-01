@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 01:12:23 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/19 17:43:33 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:00:36 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin_buffer_to_line(char **line, char *buffer)
 		return (NULL);
 	line_len = ft_gnl_strlen(*line) + 1;
 	total_len = line_len + ft_gnl_strlen(buffer);
-	res = (char *)ft_calloc(total_len, sizeof(char));
+	res = (char *)ft_gnl_calloc(total_len, sizeof(char));
 	if (!res)
 	{
 		free((*line));
@@ -39,7 +39,7 @@ char	*ft_cut_line(char *line, ssize_t len)
 	char	*res;
 	ssize_t	i;
 
-	res = ft_calloc(len + 1, sizeof(char));
+	res = ft_gnl_calloc(len + 1, sizeof(char));
 	if (!res)
 	{
 		free(line);
@@ -88,10 +88,10 @@ char	*get_next_line_helper(int fd, char *buffer, char **line)
 void	ft_init_vars(char **line, char **buffer)
 {
 	if (!(*line))
-		*line = ft_calloc(1, sizeof(char));
+		*line = ft_gnl_calloc(1, sizeof(char));
 	if (!(*line))
 		return ;
-	*buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	*buffer = ft_gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!(*buffer))
 	{
 		free(*line);

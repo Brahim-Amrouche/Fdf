@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: maboulkh <maboulkh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:38:11 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 13:26:47 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:06:31 by maboulkh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ static t_boolean   fdf_input_is_valid_file_name(char *file_name)
 void    fdf_parser(t_fdf *fdf, int input_count, char *input_value[])
 {
     int fd;
-    (void) fdf;
+
     if (!(input_count == 2 && fdf_input_is_valid_file_name(input_value[1])))
         exit_with_error(EINVAL);
     fd = open(input_value[1],O_RDONLY);
     if (fd < 0)
+	{
         exit_with_error(ENOENT);
-    close(fd);
-    return TRUE;
+	}
+	fdf_map_parser(fdf, fd);
+	close(fd);
 }

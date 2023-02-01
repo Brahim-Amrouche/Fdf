@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:48:15 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 19:04:44 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:27:47 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_point	isometric_view(t_fdf *fdf, t_point p)
 	double angle2;
 	t_point res;
 
-	angle2 = 180;
+	angle2 = 0;
 	angle = 30;
 	p.x *= fdf->block_info.width;
 	p.y *= fdf->block_info.height;

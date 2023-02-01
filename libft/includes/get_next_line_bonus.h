@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 01:07:59 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/19 17:42:24 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:00:44 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # endif
 
 size_t	ft_gnl_strlen(char *s);
-void	*ft_calloc(size_t count, size_t size);
+void	*ft_gnl_calloc(size_t count, size_t size);
 size_t	ft_gnl_strlcat(char *dst, char *src, size_t dstsize);
 ssize_t	ft_strchr_index(char *s, int c);
 char	*get_next_line(int fd);

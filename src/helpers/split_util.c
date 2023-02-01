@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:53:42 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 12:53:26 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:56:21 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char **ft_malloc_splits(char *s , t_boolean (*sep_checker)(char))
 		while (s[i] && !sep_checker(s[i]))
 			i++;
 	}
-	res = ft_malloc((count + 1) * sizeof(char *),(t_mem_manage_params){NULL, 1, NULL, 0});
+	res = ft_malloc((count + 1) * sizeof(char *),(t_mem_manage_params){NULL, 2, NULL, 0});
 	if (res)
 		ft_bzero(res, sizeof(char *) * (count + 1));
 	return (res);
@@ -50,7 +50,7 @@ static char	*ft_substr_protected(char const *s, unsigned int start, size_t len)
 		len = 0;
 	if (len >= s_len - start)
 		len = s_len - start;
-	res = (char *)ft_malloc((len + 1) * sizeof(char) ,(t_mem_manage_params){NULL , 1, NULL, 0});
+	res = (char *)ft_malloc((len + 1) * sizeof(char) ,(t_mem_manage_params){NULL , 2, NULL, 0});
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -81,7 +81,11 @@ static size_t	ft_make_splits(char **splits, char const *s, t_boolean (*sep_check
 	return (split_size);
 }
 
-char	**ft_split_multi_sep(char const *s, t_boolean (*sep_checker)(char))
+/// @brief splits given a function with boolean return , everything is malloced in scope 2
+/// @param s 
+/// @param sep_checker 
+/// @return 
+char	**ft_split_multi_sep(char *s, t_boolean (*sep_checker)(char))
 {
 	char	**res;
 	size_t	temp;

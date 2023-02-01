@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:58:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 13:38:03 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:56:40 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ int	ft_abs(int x)
 	if (x < 0)
 		return -x;
 	return x;
+}
+
+static t_boolean	ft_is_space(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (TRUE);
+	return (FALSE);
 }
 
 t_boolean	ft_str_is_integer(const char *str, long *res)
