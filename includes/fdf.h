@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/01/31 18:52:55 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:38:47 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 # include "ft_garbage_collector.h"
 # include <mlx.h>
+# include <errno.h>
 # define FRAME_WIDTH 1920
 # define FRAME_HEIGHT 1080
 
@@ -59,9 +60,14 @@ typedef struct s_fdf
 //math.c
 double				degree_to_rad(int degree);
 int					ft_abs(int x);
+t_boolean			ft_str_is_integer(const char *str, long *res);
 //utils.c
 void				pointer_swap(void **a, void **b);
 void				int_swap(int *a, int *b);
+void				exit_with_error(int errno);
+//split_util.c
+char				**ft_split_multi_sep(char const *s,
+						t_boolean (*sep_checker)(char));
 
 // rasterisation
 // fdf_pixel_put.c
