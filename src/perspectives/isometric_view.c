@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:48:15 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 21:27:47 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:41:01 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_point	isometric_view(t_fdf *fdf, t_point p)
 	angle = 30;
 	p.x *= fdf->block_info.width;
 	p.y *= fdf->block_info.height;
-	p.z *= 4;
+	p.specs.z *= 4;
 	res.x = p.x * cos(degree_to_rad(90 + 2 * angle)) + p.y
-		* cos(degree_to_rad(angle)) + p.z * sin(degree_to_rad(-30 + angle));
+		* cos(degree_to_rad(angle)) + p.specs.z * sin(degree_to_rad(-30 + angle));
 	res.y = p.x * sin(degree_to_rad(90 + 2 * angle)) + p.y
-		* sin(degree_to_rad(angle)) - p.z * cos(degree_to_rad(-30 + angle));
+		* sin(degree_to_rad(angle)) - p.specs.z * cos(degree_to_rad(-30 + angle));
 	p.x = res.x * cos(degree_to_rad(angle2)) + res.y
 		* sin(degree_to_rad(angle2));
 	res.y = -res.x * sin(degree_to_rad(angle2)) + res.y

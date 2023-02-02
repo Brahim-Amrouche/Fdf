@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 19:19:36 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 20:48:47 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:28:21 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,72 +19,65 @@ static t_boolean char_is_map_separetor(char c)
     return FALSE;
 }
 
-static void fdf_resize_rows_array(int ***rows,int *columns)
+static void fdf_resize_rows_array(t_fdf *fdf, t_point_specs ***rows, t_point_specs *columns)
 {
-	size_t i;
-	size_t rows_len;
-	int **new_rows;
+	int	i;
+	t_point_specs	**new_rows;
 
-	rows_len = 0;
-	if (*rows)
-		rows_len = (*rows)[0][0];
-	new_rows = ft_malloc(sizeof(int *) * (rows_len + 1),(t_mem_manage_params) {NULL, rows_len + 4, NULL,0});
+	new_rows = ft_malloc(sizeof(t_point_specs *) * (fdf->map.y_count + 1),(t_mem_manage_params) {NULL, fdf->map.y_count + 4, NULL,0});
 	if (!new_rows)
-		exit_with_error(ENOMEM);
+		exit_with_error(ENOMEM, "\tcouldn't malloc rows");
 	i = 0;
-	while (i < rows_len)
+	while (i < fdf->map.y_count)
 	{
 		new_rows[i] = (*rows)[i];
 		i++;
 	}
 	new_rows[i] = columns;
-	ft_free(rows_len + 3, FALSE);
-	new_rows[0][0]= rows_len + 1;
+	ft_free(fdf->map.y_count + 3, FALSE);
+	fdf->map.y_count++;
 	*rows = new_rows;
 }
 
-static int *fdf_malloc_columns_array(char **columns, int ***rows)
+static void	fdf_malloc_columns_array(t_fdf *fdf, char **columns, t_point_specs ***rows)
 {
-    size_t	len;
-	int		*columns_array;
+	int	len;
+	t_point_specs	*columns_array;
 
-	if (!*rows)
-	{
-		columns_array = ft_malloc(sizeof(int), (t_mem_manage_params){NULL, 1, NULL, 0});
-		if (!columns)
-			exit_with_error(ENOMEM);
-		columns_array[0] = 0;
-		fdf_resize_rows_array(rows, columns_array);
-	}
 	len = 0;
 	while (columns[len])
         len++;
-	columns_array = ft_malloc(sizeof(int) * (len + 1), (t_mem_manage_params){NULL, 1, *(rows)[0], 0});
+	if (fdf->map.y_count == 0)
+		columns_array = ft_malloc(sizeof(t_point_specs) * len, (t_mem_manage_params){NULL, 1, NULL, 0});
+	else
+		columns_array = ft_malloc(sizeof(t_point_specs) * len, (t_mem_manage_params){NULL, 1, (*rows)[0], 0});
 	if (!columns_array)
-		exit_with_error(ENOMEM);
-	columns_array[0] = len + 1;
-	fdf_resize_rows_array(rows, columns_array);
-	return columns_array;
+		exit_with_error(ENOMEM, "\tcouldn't malloc columns number array");
+	fdf_resize_rows_array(fdf, rows, columns_array);
+	if (fdf->map.y_count > 1 && len != fdf->map.x_count)
+		exit_with_error(EINVAL, "\t uneven rows");
+	fdf->map.x_count = len;
 }
 
-static void	fdf_parse_columns(char *line,int ***rows)
+static void	fdf_parse_columns(t_fdf *fdf, char *line, t_point_specs ***rows)
 {
     char    **columns;
-    int		*columns_array;
-    ssize_t  i;
-    long    tmp;
+    int		i;
+    int		tmp;
     
     columns = ft_split_multi_sep(line, char_is_map_separetor);
 	free(line);
 	if (!columns)
-		exit_with_error(ENOMEM);
-    i = 1;
-    columns_array = fdf_malloc_columns_array(columns, rows);
-    while(i < columns_array[0])
-    {
-        if (!ft_str_is_integer(columns[i - 1], &tmp))
-            exit_with_error(EINVAL);
-		columns_array[i] = tmp;
+		exit_with_error(ENOMEM, "\tcouldn't split the input");
+    i = 0;
+	fdf_malloc_columns_array(fdf ,columns, rows);
+    while(i < fdf->map.x_count)
+    {	
+        if (!ft_str_is_integer(columns[i], &tmp))
+            exit_with_error(EINVAL, "\tnot all inputs are numbers");
+		if (fdf->map.y_count == 1 || fdf->map.heighest_point < tmp)
+			fdf->map.heighest_point = tmp;
+		((*rows)[fdf->map.y_count - 1][i]).z = tmp;
 		i++;
 	}
 	ft_free(2, FALSE);
@@ -92,17 +85,20 @@ static void	fdf_parse_columns(char *line,int ***rows)
 
 void	fdf_map_parser(t_fdf *fdf,int fd)
 {
-    char *line;
-	int	 **rows;
+    char			*line;
+	t_point_specs	**rows;
 
 	line = get_next_line(fd);
     if (!line)
-        exit_with_error(EINVAL);
+        exit_with_error(EINVAL, "\tcouldn't read the first line");
 	rows = NULL;
 	while (line)
-	{
-		fdf_parse_columns(line, &rows);
+	{	
+		line[ft_strlen(line) - 1] = 0;
+		fdf_parse_columns(fdf, line, &rows);
 		line = get_next_line(fd);
 	}
-	fdf->map = rows;
+	fdf->map.specs = rows;
+	mem_manage_move((t_mem_manage_params){NULL, fdf->map.y_count + 3, rows, 1});
+	ft_free(fdf->map.y_count + 3, FALSE);
 }

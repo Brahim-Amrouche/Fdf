@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maboulkh <maboulkh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:38:11 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 18:06:31 by maboulkh         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:31:30 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ void    fdf_parser(t_fdf *fdf, int input_count, char *input_value[])
     int fd;
 
     if (!(input_count == 2 && fdf_input_is_valid_file_name(input_value[1])))
-        exit_with_error(EINVAL);
+        exit_with_error(EINVAL, "\ttoo many files or invalid extensions");
     fd = open(input_value[1],O_RDONLY);
     if (fd < 0)
-	{
-        exit_with_error(ENOENT);
-	}
+        exit_with_error(ENOENT, "\t error openning file");
 	fdf_map_parser(fdf, fd);
 	close(fd);
 }

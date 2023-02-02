@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 21:16:42 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:06:32 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,22 @@ static void	fdf_draw_block(t_fdf *fdf, t_point p1, t_point p2)
 
 void	draw_fdf(t_fdf *fdf)
 {
-	int x;
-	int y;
+	int	i;
+	int	j;
 
-	y = 1;
-	ft_printf("[%d]\n", fdf->map[1][3]);
-	while (y < fdf->map[0][0])
+	i = 0;
+	while (i < fdf->map.y_count)
 	{
-		x = 1;
-		while (x < fdf->map[y][0])
+		j = 0;
+		while (j < fdf->map.x_count)
 		{
-			if (x > 1)
-				fdf_draw_block(fdf, (t_point){y, x, fdf->map[y][x]}, (t_point){y, x - 1, fdf->map[y][x - 1]});
-			if (y > 1)
-				fdf_draw_block(fdf, (t_point){y, x, fdf->map[y][x]}, (t_point){y - 1, x, fdf->map[y - 1][x]});
-			x++;
+			if (i > 0)
+				fdf_draw_block(fdf, (t_point){i, j, fdf->map.specs[i][j]}, (t_point){i - 1, j, fdf->map.specs[i - 1][j]});
+			if (j > 0)
+				fdf_draw_block(fdf, (t_point){i, j, fdf->map.specs[i][j]}, (t_point){i, j - 1, fdf->map.specs[i][j - 1]});
+			j++;
 		}
-		y++;
+		i++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_window, fdf->frame.img, 0, 0);
 }

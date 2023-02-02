@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 18:55:51 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:05:29 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,28 @@ typedef struct s_frame_data
 	int				endian;
 }					t_frame_data;
 
+typedef	struct	s_point_specs
+{
+	int				z;
+	unsigned int	color;
+}	t_point_specs;
+
 typedef struct s_point
 {
 	int				x;
 	int				y;
-	int				z;
+	t_point_specs	specs;
 }					t_point;
+
+
+typedef struct s_map
+{
+	int		x_count;
+	int		y_count;
+	int		heighest_point;
+	t_point_specs	**specs;
+} t_map;
+
 
 typedef struct s_block_info
 {
@@ -54,18 +70,18 @@ typedef struct s_fdf
 	t_window_info	window_info;
 	t_block_info	block_info;
 	t_frame_data	frame;
-	int				**map;
+	t_map			map;
 } t_fdf;
 
 //helpers
 //math.c
 double				degree_to_rad(int degree);
 int					ft_abs(int x);
-t_boolean			ft_str_is_integer(const char *str, long *res);
+t_boolean			ft_str_is_integer(const char *str, int *res);
 //utils.c
 void				pointer_swap(void **a, void **b);
 void				int_swap(int *a, int *b);
-void				exit_with_error(int errn);
+void				exit_with_error(int errn,char *message);
 //split_util.c
 char				**ft_split_multi_sep(char *s,
 						t_boolean (*sep_checker)(char));

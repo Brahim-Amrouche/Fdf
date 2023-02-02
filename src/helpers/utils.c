@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maboulkh <maboulkh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:20:51 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/01 15:59:20 by maboulkh         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:05:12 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	int_swap(int *a, int *b)
 	*b = tmp;
 }
 
-void	exit_with_error(int errn)
+void	exit_with_error(int errn, char *message)
 {
 	ft_free(0, TRUE);
-	perror(strerror(errn));
+	ft_putstr_fd(strerror(errn),2);
+	ft_putendl_fd(message, 2);
 	exit(EXIT_FAILURE);
 }
