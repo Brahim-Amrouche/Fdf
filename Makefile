@@ -1,6 +1,6 @@
 SRC_FILES = ${wildcard ./src/**/*.c}  ${wildcard ./src/*.c} 
 
-CC = cc
+CC = @cc
 
 INCLUDES = -I./includes -I./libft/includes 
 
@@ -16,18 +16,18 @@ SRC_OBJS = ${patsubst %.c,%.o,$(SRC_FILES)}
 all : $(NAME)
 
 ./libft/libft.a :
-	make -C ./libft
+	@make -C ./libft
 
 $(NAME) : ./libft/libft.a $(SRC_OBJS)
 	$(CC) $(FLAGS) -lmlx -framework OpenGL -framework AppKit $^ -o $@
 
 clean :
-	make -C ./libft clean
-	rm -rf $(SRC_OBJS)
+	@make -C ./libft clean
+	@rm -rf $(SRC_OBJS)
 
 fclean : clean
-	make -C ./libft fclean
-	rm -rf $(NAME)
+	@make -C ./libft fclean
+	@rm -rf $(NAME)
 
 re : fclean all
 

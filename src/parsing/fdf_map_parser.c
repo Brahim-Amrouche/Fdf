@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 19:19:36 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/02 20:28:21 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:03:56 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ static void	fdf_parse_columns(t_fdf *fdf, char *line, t_point_specs ***rows)
 		if (fdf->map.y_count == 1 || fdf->map.heighest_point < tmp)
 			fdf->map.heighest_point = tmp;
 		((*rows)[fdf->map.y_count - 1][i]).z = tmp;
+		if (!ft_str_is_hex(columns[i],&tmp))
+			exit_with_error(EINVAL, "\thex value must be well formated");
+		((*rows)[fdf->map.y_count - 1][i]).color = (unsigned int) tmp;
+
 		i++;
 	}
 	ft_free(2, FALSE);

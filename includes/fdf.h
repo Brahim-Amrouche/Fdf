@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/02 20:05:29 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/10 20:28:43 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ typedef struct s_block_info
 {
 	unsigned int	width;
 	unsigned int	height;
-	unsigned int	color;
 }					t_block_info;
 
 typedef struct s_window_info
 {
-	unsigned int	width;
-	unsigned int	height;
+	int	width;
+	int	height;
 }					t_window_info;
 
 typedef struct s_fdf
@@ -74,6 +73,8 @@ typedef struct s_fdf
 } t_fdf;
 
 //helpers
+//hex_helpers.c
+t_boolean	ft_str_is_hex(char *str, int *res);
 //math.c
 double				degree_to_rad(int degree);
 int					ft_abs(int x);

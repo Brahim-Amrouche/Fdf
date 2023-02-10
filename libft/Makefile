@@ -34,7 +34,7 @@ CGC_OBJS = ${patsubst %.c,%.o,$(GCG_SRCS)}
 OBJS = $(LIBFT_OBJS) $(LIBFT_B_OBJS) $(PRINTF_OBJS) $(GNL_OBJS) $(CGC_OBJS)
 
 %.o : %.c
-	${GCC} ${FLAGS} -c $^ -o $@
+	@${GCC} ${FLAGS} -c $^ -o $@
 
 all : ${NAME}
 
@@ -42,10 +42,10 @@ ${NAME} :  ${OBJS}
 	ar -rcs $@ ${OBJS}
 
 clean :
-	rm -f ${OBJS} 
+	@rm -f ${OBJS} 
 
 fclean : clean
-	rm -f ${NAME}
+	@rm -f ${NAME}
 
 re : fclean	all
 
