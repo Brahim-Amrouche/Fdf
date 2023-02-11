@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:02:28 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/10 20:35:52 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:45:36 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2, t_boolean st
 		grad = (double)(p2.y - p1.y) / (double)(p2.x - p1.x);
 	while (p1.x < p2.x)
 	{
-		
+		 
 		if (steep)
 		{
 			fdf_pixel_put(fdf,(int) y, p1.x, p1.specs.color);

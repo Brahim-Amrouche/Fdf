@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/10 20:28:43 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:40:36 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct s_frame_data
 	int				line_length;
 	int				endian;
 }					t_frame_data;
+
+typedef	struct	s_rgb
+{
+	int red;
+	int	green;
+	int blue;
+}	t_rgb;
 
 typedef	struct	s_point_specs
 {
@@ -95,6 +102,8 @@ void				fdf_map_parser(t_fdf *fdf, int fd);
 void				fdf_parser(t_fdf *fdf, int input_count, char *input_value[]);
 
 // rasterisation
+///fdf_color_fade.c
+int					fdf_fade_color(t_point *p1, t_point *p2, int distance_passed);
 // fdf_pixel_put.c
 void				fdf_pixel_put(t_fdf *fdf, int x, int y, int color);
 // fdf_draw_line.c
