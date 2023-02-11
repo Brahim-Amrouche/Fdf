@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:57:53 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/11 12:38:53 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:53:57 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ static int fdf_rgb_fade(double color_shade_diff, double total_distance, int dist
 static int	fdf_rgb_picker(unsigned int color, int shade,int shift)
 {
 	return (color & shade) >> shift;
+}
+
+int fdf_color_opacity(unsigned int color, double grad)
+{
+    unsigned int opacity;
+
+    opacity = (int) (0xFF * grad) ;   
+    color = (color | (opacity << 24));
+    return color;
 }
 
 int	fdf_fade_color(t_point *p1, t_point *p2, int distance_passed)

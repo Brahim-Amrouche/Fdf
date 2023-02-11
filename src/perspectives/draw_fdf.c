@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/10 20:31:21 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:11:33 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	fdf_draw_block(t_fdf *fdf, t_point p1, t_point p2)
 	if ((p1.x > 0 && p1.x < fdf->window_info.width && p1.y > 0 && p1.y < fdf->window_info.height ) 
 		|| (p2.x > 0 && p2.x < fdf->window_info.width && p2.y > 0 && p2.y < fdf->window_info.height ))
 		fdf_draw_line(fdf, &p1, &p2);
-	
 }
 
 void	draw_fdf(t_fdf *fdf)

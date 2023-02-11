@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:02:28 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/11 12:45:36 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:55:11 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,29 @@ static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2, t_boolean st
 {
 	double	grad;
 	double	y;
+	int		color;
+	int		x;
 
+	x = p1.x;
 	y = (double)p1.y;
 	grad = 1;
 	if (p2.x - p1.x)
 		grad = (double)(p2.y - p1.y) / (double)(p2.x - p1.x);
-	while (p1.x < p2.x)
+	while (x < p2.x)
 	{
-		 
+		color = fdf_fade_color(&p1, &p2, x - p1.x);
 		if (steep)
 		{
-			fdf_pixel_put(fdf,(int) y, p1.x, p1.specs.color);
-			fdf_pixel_put(fdf,(int) y - 1, p1.x, p1.specs.color);
+			fdf_pixel_put(fdf,(int) y, x, fdf_color_opacity(color,1 - floating_point(y)));
+			fdf_pixel_put(fdf,(int) y - 1, x, fdf_color_opacity(color, floating_point(y)));
 		}
 		else 
 		{
-			fdf_pixel_put(fdf, p1.x, (int)y - 1, p1.specs.color);
-			fdf_pixel_put(fdf, p1.x, (int)y, p1.specs.color);
+			fdf_pixel_put(fdf, x, (int)y - 1, fdf_color_opacity(color, floating_point(y)));
+			fdf_pixel_put(fdf, x, (int)y, fdf_color_opacity(color, 1 - floating_point(y)));
 		}
 		y += grad;
-		p1.x++;
+		x++;
 	}
 }
 

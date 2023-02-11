@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:58:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/10 14:53:31 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:48:58 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ int	ft_abs(int x)
 	if (x < 0)
 		return -x;
 	return x;
+}
+
+double floating_point(double x)
+{
+	if (x > 0)
+		return x - (int) x;
+	else
+		return x - (int)x - 1;
 }
 
 t_boolean	ft_str_is_integer(const char *str, int	*res)
