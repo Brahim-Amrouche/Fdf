@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 15:59:21 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:27:51 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_map
 	int				y_count;
 	int				heighest_point;
 	int				z_scale;
+	double			zoom;
 	t_point_specs	**specs;
 }					t_map;
 
