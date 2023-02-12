@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:57:53 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/11 15:53:57 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:47:10 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int fdf_color_opacity(unsigned int color, double grad)
 {
     unsigned int opacity;
 
-    opacity = (int) (0xFF * grad) ;   
+    opacity = (0xFF * grad) ;   
     color = (color | (opacity << 24));
     return color;
 }

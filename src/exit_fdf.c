@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 15:48:56 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 15:58:48 by bamrouch         ###   ########.fr       */
+/*   Created: 2023/02/12 15:19:49 by bamrouch          #+#    #+#             */
+/*   Updated: 2023/02/12 15:33:47 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int main(int argc, char *argv[])
+void    exit_fdf(t_fdf *fdf, int errn, char *message, t_boolean is_error)
 {
-	t_fdf	fdf;
-
-	ft_bzero(&fdf,sizeof(fdf));
-	fdf_parser(&fdf, argc, argv);
-	fdf_mlx_init(&fdf);
-	draw_fdf(&fdf);
-	mlx_loop(fdf.mlx);
+    if(fdf->frame.img)
+        mlx_destroy_image(fdf->mlx, fdf->frame.img);
+    if(fdf->mlx_window)
+        mlx_destroy_window(fdf->mlx,fdf->mlx_window);
+    if (is_error)
+        exit_with_error(errn, message);
+    ft_free(0, TRUE);
+    exit(EXIT_SUCCESS);
 }

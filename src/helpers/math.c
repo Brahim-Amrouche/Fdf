@@ -6,12 +6,11 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:58:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/11 15:48:58 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:20:22 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <math.h>
 
 double	degree_to_rad(int degree)
 {
