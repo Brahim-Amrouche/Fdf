@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 19:27:51 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:04:10 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_map
 	int				heighest_point;
 	int				z_scale;
 	double			zoom;
+	double			horizontal_offset;
+	double			vertical_offset;
 	t_point_specs	**specs;
 }					t_map;
 
@@ -122,7 +124,7 @@ void				fdf_draw_line(t_fdf *fdf, t_point *p1, t_point *p2);
 
 // perspectives
 //draw_fdf.c
-void				draw_fdf(t_fdf *fdf);
+int					draw_fdf(t_fdf *fdf);
 // isometric_view.c
 t_point				isometric_view(t_fdf *fdf, t_point p);
 

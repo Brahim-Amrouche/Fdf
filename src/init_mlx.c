@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:27:30 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 19:16:29 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/12 20:46:27 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,6 @@ void	fdf_mlx_init(t_fdf *fdf)
 		exit_fdf(fdf, EAGAIN, "\tmlx init didnt work", TRUE);
 	fdf->window_info =(t_window_info) {FRAME_WIDTH, FRAME_HEIGHT};
 	fdf->map.zoom = 1;
+	fdf->map.horizontal_offset = 0;
+	fdf->map.vertical_offset = 0;
 }

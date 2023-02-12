@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:48:15 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 19:28:22 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/12 20:56:33 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_point	isometric_view(t_fdf *fdf, t_point p)
 		* cos(degree_to_rad(angle)) + p.specs.z * sin(degree_to_rad(-30 + angle));
 	res.y = p.x * sin(degree_to_rad(90 + 2 * angle)) + p.y
 		* sin(degree_to_rad(angle)) - p.specs.z * cos(degree_to_rad(-30 + angle));
-	res.x += fdf->window_info.width / 2;
-	res.y += fdf->window_info.height / 2;
+	res.x += fdf->window_info.width / 2 + (fdf->window_info.width * fdf->map.horizontal_offset);
+	res.y += fdf->window_info.height / 2 + (fdf->window_info.height * fdf->map.vertical_offset);
 	res.specs = p.specs;
 	return (res);
 }
