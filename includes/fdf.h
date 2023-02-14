@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 21:04:10 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:13:45 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_map
 	double			zoom;
 	double			horizontal_offset;
 	double			vertical_offset;
+	double			rot_angle;
+	t_boolean		isometric_projection;
 	t_point_specs	**specs;
 }					t_map;
 
@@ -102,7 +104,7 @@ char	**ft_split_multi_sep(char *s,
 
 // hooks
 //fdf_hook.c
-void	fdf_hooks(t_fdf *fdf);
+void				fdf_hooks(t_fdf *fdf);
 
 // parsing
 //fdf_map_parser.c
@@ -127,14 +129,17 @@ void				fdf_draw_line(t_fdf *fdf, t_point *p1, t_point *p2);
 int					draw_fdf(t_fdf *fdf);
 // isometric_view.c
 t_point				isometric_view(t_fdf *fdf, t_point p);
+// parallel_view.c
+t_point				parallel_view(t_fdf *fdf, t_point p);
 
 //exit_fdf.c
-void    exit_fdf(t_fdf *fdf, int errn, char *message, t_boolean is_error);
+void				exit_fdf(t_fdf *fdf, int errn, char *message,
+						t_boolean is_error);
 
 //init_mlx.c
-void	fdf_mlx_init(t_fdf *fdf);
-void	fdf_mlx_init_window(t_fdf *fdf);
-void	fdf_mlx_init_image(t_fdf *fdf);
+void				fdf_mlx_init(t_fdf *fdf);
+void				fdf_mlx_init_window(t_fdf *fdf);
+void				fdf_mlx_init_image(t_fdf *fdf);
 
 // X11 Event Masks
 # define NoEventMask 0L

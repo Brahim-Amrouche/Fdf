@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:58:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/12 14:20:22 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:21:01 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 double	degree_to_rad(int degree)
 {
-	return (degree * ((double)M_PI) /(double) 180.0);
+	return (degree * ((double)M_PI) / (double)180.0);
 }
 
 int	ft_abs(int x)
 {
 	if (x < 0)
-		return -x;
-	return x;
+		return (-x);
+	return (x);
 }
 
-double floating_point(double x)
+double	floating_point(double x)
 {
 	if (x > 0)
-		return x - (int) x;
+		return (x - (int)x);
 	else
-		return x - (int)x - 1;
+		return (x - (int)x - 1);
 }
 
-t_boolean	ft_str_is_integer(const char *str, int	*res)
+t_boolean	ft_str_is_integer(const char *str, int *res)
 {
 	int		i;
 	long	temp;
@@ -48,6 +48,6 @@ t_boolean	ft_str_is_integer(const char *str, int	*res)
 	temp = ft_atoi(str);
 	if (temp > INT_MAX || temp < INT_MIN)
 		return (FALSE);
-	*res = (int) temp;
+	*res = (int)temp;
 	return (TRUE);
 }
