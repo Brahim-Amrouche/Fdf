@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 19:19:36 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 18:11:21 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:50:53 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	fdf_map_parser(t_fdf *fdf, int fd)
 {
 	char			*line;
 	t_point_specs	**rows;
+	size_t			line_len;
 
 	line = get_next_line(fd);
 	if (!line)
@@ -102,7 +103,9 @@ void	fdf_map_parser(t_fdf *fdf, int fd)
 	rows = NULL;
 	while (line)
 	{
-		line[ft_strlen(line) - 1] = 0;
+		line_len = strlen(line) - 1;
+		if (line[line_len] == '\n')
+			line[line_len] = 0;
 		fdf_parse_columns(fdf, line, &rows);
 		line = get_next_line(fd);
 	}

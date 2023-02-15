@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 13:47:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 19:21:16 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:58:09 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ int	keyboard_hooks(int keycode, t_fdf *fdf)
 		fdf->map.horizontal_offset -= 0.03;
 	else if (keycode == LEFT_KEY || keycode == A_KEY)
 		fdf->map.horizontal_offset += 0.03;
-	else if (keycode == 35)
+	else if (keycode == P_KEY)
 		fdf->map.isometric_projection = !fdf->map.isometric_projection;
-	draw_fdf(fdf);
 	return (0);
 }
 
@@ -63,6 +62,11 @@ int	mouse_press_hook(int button, int x, int y, t_fdf *fdf)
 		fdf->map.rot_angle += 2;
 	else if (button == RIGHT_CLIC && fdf->map.rot_angle > -44)
 		fdf->map.rot_angle -= 2;
+	return (0);
+}
+
+int	refresh(t_fdf *fdf)
+{
 	draw_fdf(fdf);
 	return (0);
 }
@@ -73,4 +77,5 @@ void	fdf_hooks(t_fdf *fdf)
 	mlx_hook(fdf->mlx_window, KeyPress, KeyPress, keyboard_hooks, fdf);
 	mlx_hook(fdf->mlx_window, ButtonPress, ButtonPressMask, mouse_press_hook,
 		fdf);
+	mlx_loop_hook(fdf->mlx, refresh, fdf);
 }

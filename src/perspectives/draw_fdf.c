@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 19:21:35 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/15 13:33:55 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	fdf_draw_block(t_fdf *fdf, t_point p1, t_point p2)
 		fdf_draw_line(fdf, &p1, &p2);
 }
 
-int	draw_fdf(t_fdf *fdf)
+t_boolean	draw_fdf(t_fdf *fdf)
 {
 	int	i;
 	int	j;
@@ -64,5 +64,5 @@ int	draw_fdf(t_fdf *fdf)
 		i++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_window, fdf->frame.img, 0, 0);
-	return (0);
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:02:28 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 18:41:11 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:47:32 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2,
 		grad = (double)(p2.y - p1.y) / (double)(p2.x - p1.x);
 	while (x < p2.x)
 	{
-		color = fdf_fade_color(&p1, &p2, x - p1.x);
+		// color = fdf_fade_color(&p1, &p2, x - p1.x);
+		color = p2.specs.color;
 		if (steep)
 			fdf_draw_steep_line(fdf, y, x, color);
 		else

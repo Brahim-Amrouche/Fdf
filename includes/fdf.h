@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 19:13:45 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:45:47 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void				fdf_parser(t_fdf *fdf, int input_count,
 int					fdf_color_opacity(unsigned int color, double grad);
 int					fdf_fade_color(t_point *p1, t_point *p2,
 						int distance_passed);
+void				fdf_neon_color(t_fdf *fdf);
 // fdf_pixel_put.c
 void				fdf_pixel_put(t_fdf *fdf, int x, int y, int color);
 // fdf_draw_line.c
@@ -126,7 +127,7 @@ void				fdf_draw_line(t_fdf *fdf, t_point *p1, t_point *p2);
 
 // perspectives
 //draw_fdf.c
-int					draw_fdf(t_fdf *fdf);
+t_boolean			draw_fdf(t_fdf *fdf);
 // isometric_view.c
 t_point				isometric_view(t_fdf *fdf, t_point p);
 // parallel_view.c

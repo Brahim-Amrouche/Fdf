@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:53:42 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 18:21:37 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:43:43 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	**ft_malloc_splits(char *s, t_boolean (*sep_checker)(char))
 		return (NULL);
 	count = 0;
 	i = 0;
-	while (s[i] != 0)
+	while (s[i])
 	{
 		while (s[i] && sep_checker(s[i]))
 			i++;
