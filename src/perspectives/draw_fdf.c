@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/16 18:44:18 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:46:31 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ t_boolean	draw_fdf(t_fdf *fdf)
 		{
 			if (i > 0)
 				fdf_draw_block(fdf, (t_point){i, j, fdf->map.specs[i][j]},
-						(t_point){i - 1, j, fdf->map.specs[i - 1][j]});
+					(t_point){i - 1, j, fdf->map.specs[i - 1][j]});
 			if (j > 0)
 				fdf_draw_block(fdf, (t_point){i, j, fdf->map.specs[i][j]},
-						(t_point){i, j - 1, fdf->map.specs[i][j - 1]});
+					(t_point){i, j - 1, fdf->map.specs[i][j - 1]});
 			j++;
 		}
 		i++;

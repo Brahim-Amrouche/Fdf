@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 13:47:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/16 20:20:47 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:47:01 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ int	refresh(t_fdf *fdf)
 
 void	fdf_hooks(t_fdf *fdf)
 {
-	mlx_hook(fdf->mlx_window, DestroyNotify, NoEventMask, close_window, fdf);
-	mlx_hook(fdf->mlx_window, KeyPress, KeyPressMask, keyboard_hooks, fdf);
-	mlx_hook(fdf->mlx_window, ButtonPress, ButtonPressMask, mouse_press_hook,
-			fdf);
-	mlx_hook(fdf->mlx_window, MotionNotify, PointerMotionMask, rotate_hook,
-			fdf);
-	mlx_hook(fdf->mlx_window, ButtonRelease, ButtonReleaseMask,
-			mouse_release_hook, fdf);
+	mlx_hook(fdf->mlx_window, DESTROYNOTIFY, NOEVENTMASK, close_window, fdf);
+	mlx_hook(fdf->mlx_window, KEYPRESS, KEYPRESSMASK, keyboard_hooks, fdf);
+	mlx_hook(fdf->mlx_window, BUTTONPRESS, BUTTONPRESSMASK, mouse_press_hook,
+		fdf);
+	mlx_hook(fdf->mlx_window, MOTIONNOTIFY, POINTERMOTIONMASK, rotate_hook,
+		fdf);
+	mlx_hook(fdf->mlx_window, BUTTONRELEASE, BUTTONRELEASEMASK,
+		mouse_release_hook, fdf);
 	mlx_loop_hook(fdf->mlx, refresh, fdf);
 }

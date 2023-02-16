@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:55:52 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/16 20:19:48 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:49:27 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,34 @@ static int	fdf_neon_color_move(t_point *p1, t_point *p2)
 
 static void	fdf_malloc_neon_colors(t_fdf *fdf)
 {
-	int i;
-	
-	fdf->map.neon_specs = ft_malloc(fdf->map.y_count * sizeof(t_point_specs *),(t_mem_manage_params) {NULL, 1, 0, 0});
+	int	i;
+
+	fdf->map.neon_specs = ft_malloc(fdf->map.y_count * sizeof(t_point_specs *),
+			(t_mem_manage_params){NULL, 1, 0, 0});
 	if (!fdf->map.neon_specs)
 		exit_fdf(fdf, ENOMEM, "\tcouldnt malloc neon colors 2D array", TRUE);
 	i = 0;
 	while (i < fdf->map.y_count)
 	{
-		fdf->map.neon_specs[i] = ft_malloc(fdf->map.x_count * sizeof(t_point_specs),(t_mem_manage_params){NULL, 1, fdf->map.neon_specs, 0});
+		fdf->map.neon_specs[i] = ft_malloc(fdf->map.x_count
+				* sizeof(t_point_specs), (t_mem_manage_params){NULL, 1,
+				fdf->map.neon_specs, 0});
 		if (!fdf->map.neon_specs[i])
 			exit_fdf(fdf, ENOMEM, "\tcouldnt malloc a neon colors row", TRUE);
 		i++;
 	}
 }
 
-void fdf_switch_neon(t_fdf *fdf)
+void	fdf_switch_neon(t_fdf *fdf)
 {
-	void *temp;
+	void	*temp;
 
 	if (!fdf->map.neon_specs)
 		fdf_neon_color(fdf);
 	fdf->map.color_in_neon = !fdf->map.color_in_neon;
 	temp = fdf->map.specs;
 	fdf->map.specs = fdf->map.neon_specs;
-	fdf->map.neon_specs = (t_point_specs **) temp;
+	fdf->map.neon_specs = (t_point_specs **)temp;
 }
 
 void	fdf_neon_color(t_fdf *fdf)
@@ -75,7 +78,8 @@ void	fdf_neon_color(t_fdf *fdf)
 		p1.y = 0;
 		while (p1.y < p2.y)
 		{
-			fdf->map.neon_specs[p1.y][p1.x].color = fdf_neon_color_move(&p1, &p2);
+			fdf->map.neon_specs[p1.y][p1.x].color = fdf_neon_color_move(&p1,
+					&p2);
 			fdf->map.neon_specs[p1.y][p1.x].z = fdf->map.specs[p1.y][p1.x].z;
 			p1.y++;
 		}

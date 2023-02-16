@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:53:33 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/16 20:20:16 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:42: by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,28 @@
 # define FRAME_WIDTH 1920
 # define FRAME_HEIGHT 1080
 
-#define ESC_KEY 53
-#define D_KEY 2
-#define A_KEY 0
-#define W_KEY 13
-#define S_KEY 1
-#define P_KEY 35
-#define C_KEY 8
-#define RIGHT_KEY 124
-#define LEFT_KEY 123
-#define UP_KEY 126
-#define DOWN_KEY 125
-#define FORWARD_SCROLL 5
-#define BACKWARDS_SCROLL 4
-#define LEFT_CLIC 1
-#define RIGHT_CLIC 2
+# define ESC_KEY 53
+# define D_KEY 2
+# define A_KEY 0
+# define W_KEY 13
+# define S_KEY 1
+# define P_KEY 35
+# define C_KEY 8
+# define RIGHT_KEY 124
+# define LEFT_KEY 123
+# define UP_KEY 126
+# define DOWN_KEY 125
+# define FORWARD_SCROLL 5
+# define BACKWARDS_SCROLL 4
+# define LEFT_CLIC 1
+# define RIGHT_CLIC 2
 
+# define N_COLOR1 0x39B5E0
+# define N_COLOR2 0xA31ACB
 
-#define N_COLOR1 0x39B5E0
-#define N_COLOR2 0xA31ACB
-
-#define RED_SHADE 0xFF0000
-#define GREEN_SHADE 0x00FF00
-#define BLUE_SHADE 0x0000FF
+# define RED_SHADE 0xFF0000
+# define GREEN_SHADE 0x00FF00
+# define BLUE_SHADE 0x0000FF
 
 typedef struct s_frame_data
 {
@@ -130,8 +129,8 @@ void				pointer_swap(void **a, void **b);
 void				int_swap(int *a, int *b);
 void				exit_with_error(int errn, char *message);
 //split_util.c
-char	**ft_split_multi_sep(char *s,
-							t_boolean (*sep_checker)(char));
+char				**ft_split_multi_sep(char *s,
+						t_boolean (*sep_checker)(char));
 
 // hooks
 //fdf_hooks_helper.c
@@ -182,69 +181,18 @@ void				fdf_mlx_init_window(t_fdf *fdf);
 void				fdf_mlx_init_image(t_fdf *fdf);
 
 // X11 Event Masks
-# define NoEventMask 0L
-# define KeyPressMask (1L << 0)
-# define KeyReleaseMask (1L << 1)
-# define ButtonPressMask (1L << 2)
-# define ButtonReleaseMask (1L << 3)
-# define EnterWindowMask (1L << 4)
-# define LeaveWindowMask (1L << 5)
-# define PointerMotionMask (1L << 6)
-# define PointerMotionHintMask (1L << 7)
-# define Button1MotionMask (1L << 8)
-# define Button2MotionMask (1L << 9)
-# define Button3MotionMask (1L << 10)
-# define Button4MotionMask (1L << 11)
-# define Button5MotionMask (1L << 12)
-# define ButtonMotionMask (1L << 13)
-# define KeymapStateMask (1L << 14)
-# define ExposureMask (1L << 15)
-# define VisibilityChangeMask (1L << 16)
-# define StructureNotifyMask (1L << 17)
-# define ResizeRedirectMask (1L << 18)
-# define SubstructureNotifyMask (1L << 19)
-# define SubstructureRedirectMask (1L << 20)
-# define FocusChangeMask (1L << 21)
-# define PropertyChangeMask (1L << 22)
-# define ColormapChangeMask (1L << 23)
-# define OwnerGrabButtonMask (1L << 24)
+# define NOEVENTMASK 0L
+# define KEYPRESSMASK 1L
+# define BUTTONPRESSMASK 4L
+# define BUTTONRELEASEMASK 8L
+# define POINTERMOTIONMASK 64L
 
 // X11 Event Names
 
-# define KeyPress 2
-# define KeyRelease 3
-# define ButtonPress 4
-# define ButtonRelease 5
-# define MotionNotify 6
-# define EnterNotify 7
-# define LeaveNotify 8
-# define FocusIn 9
-# define FocusOut 10
-# define KeymapNotify 11
-# define Expose 12
-# define GraphicsExpose 13
-# define NoExpose 14
-# define VisibilityNotify 15
-# define CreateNotify 16
-# define DestroyNotify 17
-# define UnmapNotify 18
-# define MapNotify 19
-# define MapRequest 20
-# define ReparentNotify 21
-# define ConfigureNotify 22
-# define ConfigureRequest 23
-# define GravityNotify 24
-# define ResizeRequest 25
-# define CirculateNotify 26
-# define CirculateRequest 27
-# define PropertyNotify 28
-# define SelectionClear 29
-# define SelectionRequest 30
-# define SelectionNotify 31
-# define ColormapNotify 32
-# define ClientMessage 33
-# define MappingNotify 34
-# define GenericEvent 35
-# define LASTEvent 36
+# define KEYPRESS 2
+# define BUTTONPRESS 4
+# define BUTTONRELEASE 5
+# define MOTIONNOTIFY 6
+# define DESTROYNOTIFY 17
 
 #endif
