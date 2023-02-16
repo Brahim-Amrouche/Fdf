@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:06:10 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/02 20:21:37 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:51:04 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,33 +94,33 @@ t_list	*mem_find_scope(uint64_t scope)
 }
 
 //prints the memory state for debuging purposes
-void	ft_print_memory(void)
-{
-	t_list	*mem_root;
-	t_list	*scope_node;
-	t_list	*memory_node;
-	size_t	mem_nodes_counter;
+// void	ft_print_memory(void)
+// {
+// 	t_list	*mem_root;
+// 	t_list	*scope_node;
+// 	t_list	*memory_node;
+// 	size_t	mem_nodes_counter;
 
-	mem_root = *memory_root();
-	while (mem_root)
-	{
-		scope_node = mem_root->content;
-		ft_printf("for scope_id %d\n", *(uint64_t *)scope_node->content);
-		scope_node = scope_node->next;
-		mem_nodes_counter = 1;
-		while (scope_node)
-		{
-			memory_node = scope_node->content;
-			ft_printf("	this memory node %d\n", mem_nodes_counter);
-			while (memory_node)
-			{
-				ft_printf("		address %p\n", memory_node->content);
-				memory_node = memory_node->next;
-			}
-			mem_nodes_counter++;
-			scope_node = scope_node->next;
-		}
-		ft_printf("end of scope node with %d nodes\n", --mem_nodes_counter);
-		mem_root = mem_root->next;
-	}
-}
+// 	mem_root = *memory_root();
+// 	while (mem_root)
+// 	{
+// 		scope_node = mem_root->content;
+// 		ft_printf("for scope_id %d\n", *(uint64_t *)scope_node->content);
+// 		scope_node = scope_node->next;
+// 		mem_nodes_counter = 1;
+// 		while (scope_node)
+// 		{
+// 			memory_node = scope_node->content;
+// 			ft_printf("	this memory node %d\n", mem_nodes_counter);
+// 			while (memory_node)
+// 			{
+// 				ft_printf("		address %p\n", memory_node->content);
+// 				memory_node = memory_node->next;
+// 			}
+// 			mem_nodes_counter++;
+// 			scope_node = scope_node->next;
+// 		}
+// 		ft_printf("end of scope node with %d nodes\n", --mem_nodes_counter);
+// 		mem_root = mem_root->next;
+// 	}
+// }
