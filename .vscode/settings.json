@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "xplugin.h": "c"
+        "xplugin.h": "c",
+        "fdf.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/16 20:46:31 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:11:37 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,62 +30,53 @@ static void	fdf_offset_points(t_fdf *fdf, t_point *p)
 			* fdf->map.vertical_offset);
 }
 
-static void	fdf_project_points(t_fdf *fdf, t_point *p1, t_point *p2)
+static void	fdf_draw_block(t_fdf *fdf, t_point axis, t_point p2)
 {
-	fdf_scale_points(fdf, p1);
-	fdf_scale_points(fdf, p2);
-	fdf_rotate_points(fdf, p1);
-	fdf_rotate_points(fdf, p2);
-	if (fdf->map.isometric_projection)
-	{
-		*p1 = isometric_view(fdf, *p1);
-		*p2 = isometric_view(fdf, *p2);
-	}
-	else
-	{
-		*p1 = parallel_view(fdf, *p1);
-		*p2 = parallel_view(fdf, *p2);
-	}
-	fdf_offset_points(fdf, p1);
-	fdf_offset_points(fdf, p2);
-}
-
-static void	fdf_draw_block(t_fdf *fdf, t_point p1, t_point p2)
-{
-	fdf_project_points(fdf, &p1, &p2);
-	if (!p1.specs.color)
-		p1.specs.color = fdf->block_info.default_color;
-	if (!p2.specs.color)
-		p2.specs.color = fdf->block_info.default_color;
-	if ((p1.x > 0 && p1.x < fdf->window_info.width && p1.y > 0
-			&& p1.y < fdf->window_info.height) || (p2.x > 0
+	if ((axis.x > 0 && axis.x < fdf->window_info.width && axis.y > 0
+			&& axis.y < fdf->window_info.height) || (p2.x > 0
 			&& p2.x < fdf->window_info.width && p2.y > 0
 			&& p2.y < fdf->window_info.height))
-		fdf_draw_line(fdf, &p1, &p2);
+		fdf_draw_line(fdf, &axis, &p2);
+}
+
+t_point	fdf_project_point(t_fdf *fdf, t_point p)
+{
+	fdf_scale_points(fdf, &p);
+	fdf_rotate_points(fdf, &p);
+	if (fdf->map.isometric_projection)
+		p = isometric_view(fdf, p);
+	else
+		p = parallel_view(fdf, p);
+	fdf_offset_points(fdf, &p);
+	if (!p.specs.color)
+		p.specs.color = fdf->block_info.default_color;
+	return (p);
 }
 
 t_boolean	draw_fdf(t_fdf *fdf)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_point	**projected_points;
 
 	fdf_mlx_init_window(fdf);
 	fdf_mlx_init_image(fdf);
-	i = 0;
-	while (i < fdf->map.y_count)
+	if (!fdf->map.projected_points)
+		fdf_malloc_projected_points(fdf);
+	projected_points = fdf_project_all_points(fdf);
+	i = -1;
+	while (++i < fdf->map.y_count)
 	{
-		j = 0;
-		while (j < fdf->map.x_count)
+		j = -1;
+		while (++j < fdf->map.x_count)
 		{
 			if (i > 0)
-				fdf_draw_block(fdf, (t_point){i, j, fdf->map.specs[i][j]},
-					(t_point){i - 1, j, fdf->map.specs[i - 1][j]});
+				fdf_draw_block(fdf, projected_points[i][j],
+					projected_points[i - 1][j]);
 			if (j > 0)
-				fdf_draw_block(fdf, (t_point){i, j, fdf->map.specs[i][j]},
-					(t_point){i, j - 1, fdf->map.specs[i][j - 1]});
-			j++;
+				fdf_draw_block(fdf, projected_points[i][j],
+					projected_points[i][j - 1]);
 		}
-		i++;
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_window, fdf->frame.img, 0, 0);
 	return (TRUE);

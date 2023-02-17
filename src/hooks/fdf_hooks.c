@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 13:47:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/16 20:47:01 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/17 1 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	keyboard_hooks(int keycode, t_fdf *fdf)
 	else if (keycode == P_KEY)
 		fdf->map.isometric_projection = !fdf->map.isometric_projection;
 	else if (keycode == C_KEY)
-		fdf_switch_neon(fdf);
+		fdf->map.color_in_neon = !fdf->map.color_in_neon;
 	return (0);
 }
 
@@ -56,7 +56,13 @@ int	mouse_press_hook(int button, int x, int y, t_fdf *fdf)
 
 int	refresh(t_fdf *fdf)
 {
-	draw_fdf(fdf);
+	static int	fps;
+
+	if (fps++ > 500)
+	{
+		fps = 0;
+		draw_fdf(fdf);
+	}
 	return (0);
 }
 

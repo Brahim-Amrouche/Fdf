@@ -79,6 +79,7 @@ typedef struct s_map
 	int				heighest_point;
 	int				z_scale;
 	int				rot_start[2];
+	int				neon_step;
 	double			zoom;
 	double			horizontal_offset;
 	double			vertical_offset;
@@ -90,7 +91,7 @@ typedef struct s_map
 	t_boolean		isometric_projection;
 	t_boolean		color_in_neon;
 	t_point_specs	**specs;
-	t_point_specs	**neon_specs;
+	t_point			**projected_points;
 }					t_map;
 
 typedef struct s_block_info
@@ -140,8 +141,13 @@ int					mouse_release_hook(int button, int x, int y, t_fdf *fdf);
 void				fdf_hooks(t_fdf *fdf);
 
 // parsing
+
+//fdf_projection.c
+void				fdf_malloc_projected_points(t_fdf *fdf);
+t_point				**fdf_project_all_points(t_fdf *fdf);
 //fdf_map_parser.c
 void				fdf_map_parser(t_fdf *fdf, int fd);
+t_point				fdf_project_point(t_fdf *fdf, t_point p);
 
 //parser.c
 void				fdf_parser(t_fdf *fdf, int input_count,
@@ -154,8 +160,8 @@ int					fdf_color_opacity(unsigned int color, double grad);
 int					fdf_fade_color(t_point *p1, t_point *p2,
 						int distance_passed);
 //fdf_neon_color.c
-void				fdf_switch_neon(t_fdf *fdf);
-void				fdf_neon_color(t_fdf *fdf);
+unsigned int		fdf_neon_color_move(t_point *p, int y_count, int neon_step);
+
 // fdf_pixel_put.c
 void				fdf_pixel_put(t_fdf *fdf, int x, int y, int color);
 // fdf_draw_line.c
