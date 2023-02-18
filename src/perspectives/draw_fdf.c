@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/18 20:46:29 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/18 21:42:04 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 static void	fdf_scale_points(t_fdf *fdf, t_point *p)
 {
+	double	z_max_size;
+
 	p->x = (p->x - fdf->map.x_count / 2) * (fdf->block_info.width
 			* fdf->map.zoom);
 	p->y = (p->y - fdf->map.y_count / 2) * (fdf->block_info.height
 			* fdf->map.zoom);
+	z_max_size = (double)(log(1 + fdf->map.heighest_point) * 20);
 	if (p->specs.z >= 0)
-		p->specs.z = (double) (log(1 + fdf->map.heighest_point) * 10)  * (1 - exp(- (double) 1 / 50 * p->specs.z));
+		p->specs.z = z_max_size *(1 - exp(-(double)1 / 50 * p->specs.z))
+			* (fdf->map.z_scale * fdf->map.zoom);
 	else
-		p->specs.z = (double) (-log(1 + fdf->map.heighest_point) * 10) * (1 - exp(- (double) 1 / 50 * -p->specs.z));
+		p->specs.z = -z_max_size *(1 - exp(-(double)1 / 50 * -p->specs.z))
+			* (fdf->map.z_scale * fdf->map.zoom);
 }
 
 static void	fdf_offset_points(t_fdf *fdf, t_point *p)
@@ -35,11 +40,10 @@ static void	fdf_offset_points(t_fdf *fdf, t_point *p)
 static void	fdf_draw_block(t_fdf *fdf, t_point axis, t_point p2)
 {
 	if ((axis.x > 0 && axis.x < fdf->window_info.width && axis.y > 0
-		&& axis.y < fdf->window_info.height))
+			&& axis.y < fdf->window_info.height))
 		fdf_draw_line(fdf, &p2, &axis);
-	else if ((p2.x > 0
-		&& p2.x < fdf->window_info.width && p2.y > 0
-		&& p2.y < fdf->window_info.height))
+	else if ((p2.x > 0 && p2.x < fdf->window_info.width && p2.y > 0
+			&& p2.y < fdf->window_info.height))
 		fdf_draw_line(fdf, &p2, &axis);
 }
 

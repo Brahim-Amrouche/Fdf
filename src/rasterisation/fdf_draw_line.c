@@ -14,34 +14,35 @@
 
 static t_boolean	fdf_draw_steep_line(t_fdf *fdf, double y, int x, int color)
 {
-	t_boolean pixel_is_put;
+	t_boolean	pixel_is_put;
 
-	pixel_is_put = fdf_pixel_put(fdf, (int)y, x, 
-		fdf_color_opacity(color, 1 - floating_point(y)));
-	pixel_is_put = fdf_pixel_put(fdf, (int)y - 1, x, 
-		fdf_color_opacity(color, floating_point(y)));
-	return pixel_is_put;
+	pixel_is_put = fdf_pixel_put(fdf, (int)y, x,
+			fdf_color_opacity(color, 1 - floating_point(y)));
+	pixel_is_put = fdf_pixel_put(fdf, (int)y - 1, x,
+			fdf_color_opacity(color, floating_point(y)));
+	return (pixel_is_put);
 }
 
-static t_boolean	fdf_draw_straight_line(t_fdf *fdf, int x, double y, int color)
+static t_boolean	fdf_draw_straight_line(t_fdf *fdf, int x, double y,
+		int color)
 {
-	t_boolean pixel_is_put;
+	t_boolean	pixel_is_put;
 
-	pixel_is_put = fdf_pixel_put(fdf, x, (int)y - 1, 
-		fdf_color_opacity(color, floating_point(y)));
-	pixel_is_put = fdf_pixel_put(fdf, x, (int)y,
-		fdf_color_opacity(color, 1 - floating_point(y)));
-	return pixel_is_put;
+	pixel_is_put = fdf_pixel_put(fdf, x, (int)y - 1, fdf_color_opacity(color,
+				floating_point(y)));
+	pixel_is_put = fdf_pixel_put(fdf, x, (int)y, fdf_color_opacity(color, 1
+				- floating_point(y)));
+	return (pixel_is_put);
 }
 
 static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2,
 		t_boolean steep)
 {
-	double	grad;
-	double	y;
-	int		color;
-	int		x;
-	t_boolean pixel_is_put;
+	double		grad;
+	double		y;
+	int			color;
+	int			x;
+	t_boolean	pixel_is_put;
 
 	x = p1.x;
 	y = (double)p1.y;
@@ -56,7 +57,7 @@ static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2,
 		else
 			pixel_is_put = fdf_draw_straight_line(fdf, x, y, color);
 		if (!pixel_is_put)
-			break;
+			break ;
 		y += grad;
 		x++;
 	}
