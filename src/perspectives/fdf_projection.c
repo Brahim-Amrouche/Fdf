@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 20:07:23 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/17 21:03:58 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:05:14 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,10 @@ t_point	**fdf_project_all_points(t_fdf *fdf)
 				fdf->map.specs[i][j]};
 			p = &(fdf->map.projected_points[i][j]);
 			if (fdf->map.color_in_neon)
-				p->specs.color = fdf_neon_color_move(p, fdf->map.y_count,
+				p->specs.color = fdf_neon_color_move(p, fdf->map.x_count,
 						fdf->map.neon_step);
 			*p = fdf_project_point(fdf, *p);
 		}
-		if (fdf->map.color_in_neon && fdf->map.neon_step++ > fdf->map.y_count)
-			fdf->map.neon_step = 0;
 	}
 	return (fdf->map.projected_points);
 }

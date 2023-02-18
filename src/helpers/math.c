@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:58:44 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/14 18:21:01 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:40:18 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ t_boolean	ft_str_is_integer(const char *str, int *res)
 	int		i;
 	long	temp;
 
-	i = 0;
-	if (str[0] == '-' || str[0] == '+')
-		i++;
-	if (!ft_isdigit(str[i]))
+	if (*str == '-' || *str == '+')
+		str++;
+	if (!ft_isdigit(*str))
 		return (FALSE);
+	while (*str == '0')
+		str++;
+	i = 0;
 	while (str[i] && str[i] != ',')
-		if (i > 11 || !ft_isdigit(str[i++]))
+		if (i > 10 || !ft_isdigit(str[i++]))
 			return (FALSE);
 	temp = ft_atoi(str);
 	if (temp > INT_MAX || temp < INT_MIN)

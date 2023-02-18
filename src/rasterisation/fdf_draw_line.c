@@ -12,12 +12,26 @@
 
 #include "fdf.h"
 
-static void	fdf_draw_steep_line(t_fdf *fdf, double y, int x, int color)
+static t_boolean	fdf_draw_steep_line(t_fdf *fdf, double y, int x, int color)
 {
-	fdf_pixel_put(fdf, (int)y, x, fdf_color_opacity(color, 1
-			- floating_point(y)));
-	fdf_pixel_put(fdf, (int)y - 1, x, fdf_color_opacity(color,
-			floating_point(y)));
+	t_boolean pixel_is_put;
+
+	pixel_is_put = fdf_pixel_put(fdf, (int)y, x, 
+		fdf_color_opacity(color, 1 - floating_point(y)));
+	pixel_is_put = fdf_pixel_put(fdf, (int)y - 1, x, 
+		fdf_color_opacity(color, floating_point(y)));
+	return pixel_is_put;
+}
+
+static t_boolean	fdf_draw_straight_line(t_fdf *fdf, int x, double y, int color)
+{
+	t_boolean pixel_is_put;
+
+	pixel_is_put = fdf_pixel_put(fdf, x, (int)y - 1, 
+		fdf_color_opacity(color, floating_point(y)));
+	pixel_is_put = fdf_pixel_put(fdf, x, (int)y,
+		fdf_color_opacity(color, 1 - floating_point(y)));
+	return pixel_is_put;
 }
 
 static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2,
@@ -27,6 +41,7 @@ static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2,
 	double	y;
 	int		color;
 	int		x;
+	t_boolean pixel_is_put;
 
 	x = p1.x;
 	y = (double)p1.y;
@@ -37,14 +52,11 @@ static void	fdf_put_line_pixels(t_fdf *fdf, t_point p1, t_point p2,
 	{
 		color = fdf_fade_color(&p1, &p2, x - p1.x);
 		if (steep)
-			fdf_draw_steep_line(fdf, y, x, color);
+			pixel_is_put = fdf_draw_steep_line(fdf, y, x, color);
 		else
-		{
-			fdf_pixel_put(fdf, x, (int)y - 1, fdf_color_opacity(color,
-					floating_point(y)));
-			fdf_pixel_put(fdf, x, (int)y, fdf_color_opacity(color, 1
-					- floating_point(y)));
-		}
+			pixel_is_put = fdf_draw_straight_line(fdf, x, y, color);
+		if (!pixel_is_put)
+			break;
 		y += grad;
 		x++;
 	}

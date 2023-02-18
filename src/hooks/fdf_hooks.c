@@ -22,17 +22,17 @@ int	keyboard_hooks(int keycode, t_fdf *fdf)
 {
 	if (keycode == ESC_KEY)
 		exit_fdf(fdf, 0, NULL, FALSE);
-	else if (keycode == DOWN_KEY || keycode == S_KEY)
+	else if (BONUS && (keycode == DOWN_KEY || keycode == S_KEY))
 		fdf->map.vertical_offset -= 0.03;
-	else if (keycode == UP_KEY || keycode == W_KEY)
+	else if (BONUS && (keycode == UP_KEY || keycode == W_KEY))
 		fdf->map.vertical_offset += 0.03;
-	else if (keycode == RIGHT_KEY || keycode == D_KEY)
+	else if (BONUS && (keycode == RIGHT_KEY || keycode == D_KEY))
 		fdf->map.horizontal_offset -= 0.03;
-	else if (keycode == LEFT_KEY || keycode == A_KEY)
+	else if (BONUS && (keycode == LEFT_KEY || keycode == A_KEY))
 		fdf->map.horizontal_offset += 0.03;
-	else if (keycode == P_KEY)
+	else if (BONUS && keycode == P_KEY)
 		fdf->map.isometric_projection = !fdf->map.isometric_projection;
-	else if (keycode == C_KEY)
+	else if (BONUS && keycode == C_KEY)
 		fdf->map.color_in_neon = !fdf->map.color_in_neon;
 	return (0);
 }
@@ -41,11 +41,11 @@ int	mouse_press_hook(int button, int x, int y, t_fdf *fdf)
 {
 	(void)x;
 	(void)y;
-	if (button == BACKWARDS_SCROLL && fdf->map.zoom > 0.2)
+	if (BONUS && button == BACKWARDS_SCROLL && fdf->map.zoom > 0.2)
 		fdf->map.zoom -= 0.08;
-	else if (button == FORWARD_SCROLL)
+	else if (BONUS && button == FORWARD_SCROLL)
 		fdf->map.zoom += 0.08;
-	else if (button == LEFT_CLIC)
+	else if (BONUS && button == LEFT_CLIC)
 	{
 		fdf->map.activate_rot = TRUE;
 		fdf->map.rot_start[0] = x;
@@ -62,6 +62,9 @@ int	refresh(t_fdf *fdf)
 	{
 		fps = 0;
 		draw_fdf(fdf);
+		if (BONUS && fdf->map.color_in_neon
+			&& fdf->map.neon_step++ > fdf->map.x_count)
+			fdf->map.neon_step = 0;
 	}
 	return (0);
 }

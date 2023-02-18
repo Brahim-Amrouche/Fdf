@@ -4,14 +4,14 @@ CC = @cc
 
 INCLUDES = -I./includes -I./libft/includes 
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address $(INCLUDES)
+FLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
 NAME = fdf
 
 SRC_OBJS = ${patsubst %.c,%.o,$(SRC_FILES)}
 
 %.o : %.c
-	$(CC) $(FLAGS) -c $^ -o $@
+	$(CC) $(FLAGS) -D BONUS=1 -c $^ -o $@
 
 all : $(NAME)
 
@@ -19,7 +19,7 @@ all : $(NAME)
 	@make -C ./libft
 
 $(NAME) : ./libft/libft.a $(SRC_OBJS)
-	$(CC) $(FLAGS) -lmlx -framework OpenGL -framework AppKit $^ -o $@
+	$(CC) $(FLAGS) -D BONUS=1 -lmlx  -framework OpenGL -framework AppKit $^ -o $@
 
 clean :
 	@make -C ./libft clean

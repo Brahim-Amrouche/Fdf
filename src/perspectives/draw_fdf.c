@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/17 20:11:37 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:46:29 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void	fdf_scale_points(t_fdf *fdf, t_point *p)
 			* fdf->map.zoom);
 	p->y = (p->y - fdf->map.y_count / 2) * (fdf->block_info.height
 			* fdf->map.zoom);
-	if (ft_abs(p->specs.z) < fdf->map.heighest_point * 0.85)
-		p->specs.z *= 0.95;
+	if (p->specs.z >= 0)
+		p->specs.z = (double) (log(1 + fdf->map.heighest_point) * 10)  * (1 - exp(- (double) 1 / 50 * p->specs.z));
+	else
+		p->specs.z = (double) (-log(1 + fdf->map.heighest_point) * 10) * (1 - exp(- (double) 1 / 50 * -p->specs.z));
 }
 
 static void	fdf_offset_points(t_fdf *fdf, t_point *p)
@@ -33,10 +35,12 @@ static void	fdf_offset_points(t_fdf *fdf, t_point *p)
 static void	fdf_draw_block(t_fdf *fdf, t_point axis, t_point p2)
 {
 	if ((axis.x > 0 && axis.x < fdf->window_info.width && axis.y > 0
-			&& axis.y < fdf->window_info.height) || (p2.x > 0
-			&& p2.x < fdf->window_info.width && p2.y > 0
-			&& p2.y < fdf->window_info.height))
-		fdf_draw_line(fdf, &axis, &p2);
+		&& axis.y < fdf->window_info.height))
+		fdf_draw_line(fdf, &p2, &axis);
+	else if ((p2.x > 0
+		&& p2.x < fdf->window_info.width && p2.y > 0
+		&& p2.y < fdf->window_info.height))
+		fdf_draw_line(fdf, &p2, &axis);
 }
 
 t_point	fdf_project_point(t_fdf *fdf, t_point p)

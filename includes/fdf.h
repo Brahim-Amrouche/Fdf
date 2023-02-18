@@ -43,6 +43,10 @@
 # define GREEN_SHADE 0x00FF00
 # define BLUE_SHADE 0x0000FF
 
+# ifndef BONUS
+#  define BONUS FALSE
+# endif
+
 typedef struct s_frame_data
 {
 	void			*img;
@@ -163,7 +167,7 @@ int					fdf_fade_color(t_point *p1, t_point *p2,
 unsigned int		fdf_neon_color_move(t_point *p, int y_count, int neon_step);
 
 // fdf_pixel_put.c
-void				fdf_pixel_put(t_fdf *fdf, int x, int y, int color);
+t_boolean			fdf_pixel_put(t_fdf *fdf, int x, int y, int color);
 // fdf_draw_line.c
 void				fdf_draw_line(t_fdf *fdf, t_point *p1, t_point *p2);
 
