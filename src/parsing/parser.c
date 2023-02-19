@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:38:11 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/18 22:44:54 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:02:05 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ static void	fdf_init_block_info(t_fdf *fdf, int input_count,
 	}
 	else
 	{
-		block_size = log(500 + fdf->map.x_count * fdf->map.y_count);
+		block_size = log2(1024 + (fdf->map.x_count * fdf->map.y_count));
 		fdf->block_info = (t_block_info){block_size, block_size, 0xFFFFFF};
-		if (block_size <= 6)
-			fdf->block_info = (t_block_info){10, 10, 0xFFFFFF};
-	}
+	}	
 }
 
 static void	fdf_init_z_size(t_fdf *fdf, int input_count, char *input_value[])

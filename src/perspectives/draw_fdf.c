@@ -6,7 +6,7 @@
 /*   By: bamrouch <bamrouch@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:05:00 by bamrouch          #+#    #+#             */
-/*   Updated: 2023/02/18 21:42:04 by bamrouch         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:00:07 by bamrouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	fdf_scale_points(t_fdf *fdf, t_point *p)
 			* fdf->map.zoom);
 	p->y = (p->y - fdf->map.y_count / 2) * (fdf->block_info.height
 			* fdf->map.zoom);
-	z_max_size = (double)(log(1 + fdf->map.heighest_point) * 20);
+	z_max_size = (double)log2(64 + fdf->map.heighest_point) * 30;
 	if (p->specs.z >= 0)
-		p->specs.z = z_max_size *(1 - exp(-(double)1 / 50 * p->specs.z))
+		p->specs.z = z_max_size *(1 - exp(-(double)1 / 60 * p->specs.z))
 			* (fdf->map.z_scale * fdf->map.zoom);
 	else
-		p->specs.z = -z_max_size *(1 - exp(-(double)1 / 50 * -p->specs.z))
-			* (fdf->map.z_scale * fdf->map.zoom);
+		p->specs.z = -(z_max_size *(1 - exp(-(double)1 / 60 * -p->specs.z))
+				* (fdf->map.z_scale * fdf->map.zoom));
 }
 
 static void	fdf_offset_points(t_fdf *fdf, t_point *p)

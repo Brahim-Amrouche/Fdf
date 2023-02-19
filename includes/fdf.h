@@ -43,10 +43,6 @@
 # define GREEN_SHADE 0x00FF00
 # define BLUE_SHADE 0x0000FF
 
-# ifndef BONUS
-#  define BONUS FALSE
-# endif
-
 typedef struct s_frame_data
 {
 	void			*img;
@@ -80,7 +76,7 @@ typedef struct s_map
 {
 	int				x_count;
 	int				y_count;
-	int				heighest_point;
+	long			heighest_point;
 	int				z_scale;
 	int				rot_start[2];
 	int				neon_step;
@@ -126,7 +122,7 @@ typedef struct s_fdf
 t_boolean			ft_str_is_hex(char *str, int *res);
 //math.c
 double				degree_to_rad(int degree);
-int					ft_abs(int x);
+long				ft_abs(long x);
 double				floating_point(double x);
 t_boolean			ft_str_is_integer(const char *str, int *res);
 //utils.c
